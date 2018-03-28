@@ -11,6 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -43,6 +44,7 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
     private MyAdapter adapter;
 
     SwipeRefreshLayout swipeRefreshLayout;
+    public int headerOneheight = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
     boolean isLoading;
     int[] shorts;
     View header;
+    LinearLayout header_one;
+    int ScrollY = 0;
 
     private void initView() {
         shorts = new int[2];
@@ -102,8 +106,8 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
         recyclerView.setAdapter(adapter);
 
         header = LayoutInflater.from(this).inflate(R.layout.item_header, recyclerView, false);
+        header_one = (LinearLayout) header.findViewById(R.id.header_one);
         adapter.setHeaderView(header);
-
 //        //添加点击事件
 //        adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerItemClickListener() {
 //            @Override
@@ -136,6 +140,17 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                ScrollY += dy;
+                float tabsTranslationY;
+                if (ScrollY < headerOneheight){
+                    tabsTranslationY =.0f;
+                }else {
+                    tabsTranslationY = ScrollY - headerOneheight;
+                }
+                header.setTranslationY(tabsTranslationY);
+
+                Log.d("bilang", "滚动距离"+ ScrollY);
+
                 int[] lastVisibleItemPositions = staggeredGridLayoutManager.findLastVisibleItemPositions(shorts);
                 int lastVisibleItemPosition = lastVisibleItemPositions[0];
                 int lastVisibleItemPosition1 = lastVisibleItemPositions[1];
@@ -187,6 +202,11 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
         return 1;
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        headerOneheight = header_one.getMeasuredHeight();
+    }
 
     boolean isCanAnima = true;
     boolean isShow = true;
@@ -201,16 +221,16 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
     }
 
     private void scrollview() {
-//        recyclerView.scrollBy(0, 1000);
+//        recyclerView.scrollBy(0, 0);
         StaggeredGridLayoutManager manager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
-//        recyclerView.smoothScrollToPosition(1);
-        recyclerView.scrollToPosition(0);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.smoothScrollBy(0, header.getHeight() - 300);
-            }
-        }, 150);
+        recyclerView.smoothScrollToPosition(1);
+//        recyclerView.scrollToPosition(0);
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                recyclerView.smoothScrollBy(0, header.getHeight() - 300);
+//            }
+//        }, 150);
 //        recyclerView.scrollBy(0, 3000);
     }
 
@@ -276,6 +296,8 @@ public class RecycleDemoActivity extends Activity implements View.OnClickListene
 
             adapter.notifyDataSetChanged();
             Log.e("bilang", "解析成功==" + lists.toString());
+            Log.e("bilang", "高度==" + headerOneheight);
+
         } catch (Exception e) {
             Log.e("bilang", "解析失败==" + e.toString());
         }

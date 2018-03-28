@@ -21,11 +21,7 @@ import android.widget.TextView;
 import com.lbl.codek3demo.R;
 
 /**
- * Created by WuXiaolong on 2015/7/2.
- * github:https://github.com/WuXiaolong/PullLoadMoreRecyclerView
- * weibo:http://weibo.com/u/2175011601
- * 微信公众号：吴小龙同学
- * 个人博客：http://wuxiaolong.me/
+ * Created by libilang on 2016/7/2.
  */
 public class PullLoadMoreRecyclerView extends LinearLayout {
     private RecyclerView mRecyclerView;
@@ -251,6 +247,11 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
         }
     }
 
+    public void getScrollYDis(int scrollY) {
+        if (mPullLoadMoreListener != null)
+            mPullLoadMoreListener.onGetScrollY(scrollY);
+    }
+
 
     public void setPullLoadMoreCompleted() {
         isRefresh = false;
@@ -299,5 +300,7 @@ public class PullLoadMoreRecyclerView extends LinearLayout {
         void onRefresh();
 
         void onLoadMore();
+
+        void onGetScrollY(int Y);
     }
 }

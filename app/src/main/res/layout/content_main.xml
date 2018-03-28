@@ -29,89 +29,95 @@
 
             </ListView>
 
-            <TextView
-                android:id="@+id/asdasdasda"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="滑动隐藏demo1"
-                android:textColor="@color/white" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible">
+                <TextView
+                    android:id="@+id/asdasdasda"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="滑动隐藏demo1"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/tianmaossss"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="120dp"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="天猫滑动隐藏demo"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/tianmaossss"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="120dp"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="天猫滑动隐藏demo"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/recycle"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="230dp"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="recycledemo"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/recycle"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="230dp"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="recycledemo"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/demo"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="100dp"
-                android:layout_marginLeft="220dp"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="测试demo"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/demo"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginLeft="220dp"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="测试demo"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/pulldemo"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="100dp"
-                android:layout_marginLeft="70dp"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="puldemo"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/pulldemo"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginLeft="70dp"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="puldemo"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/camrea"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="180dp"
-                android:layout_marginLeft="70dp"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="camera"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/camrea"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="180dp"
+                    android:layout_marginLeft="70dp"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="camera"
+                    android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/truck_gang"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="路线规划"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/truck_gang"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/red"
+                    android:gravity="center"
+                    android:text="路线规划"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
         <LinearLayout
@@ -124,7 +130,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="bl 高仿淘宝搜索 头部title 滑动隐藏"
+                android:text="bl 仿淘宝搜索 头部title 滑动隐藏"
                 android:textColor="@color/black_19"
                 android:textSize="20dp" />
 

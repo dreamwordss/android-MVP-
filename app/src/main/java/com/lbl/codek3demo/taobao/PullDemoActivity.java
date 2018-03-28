@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -39,7 +40,8 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
     List<taobaoBean.DataBean.ContentBean> lists = new ArrayList<>();
     private boolean mHasRequestedMore;
     PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
-
+    LinearLayout header_one;
+    View header;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
         initView();
         getDataFromNet(false, 0);
     }
-
+    int headerOneheight = 0;
 
     int currentRank = 0;
     StaggeredRecycleViewAdapter mRecyclerViewAdapter;
@@ -57,7 +59,6 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
     private void initView() {
         LayoutInflater layoutInflater = getLayoutInflater();
 
-        View header;
         View footer = layoutInflater.inflate(R.layout.item_foot, null);
         mAdapter = new TaobaoSearchAdapter(PullDemoActivity.this, lists);
         mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) findViewById(R.id.pullLoadMoreRecyclerView);
@@ -65,6 +66,7 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
         mRecyclerViewAdapter = new StaggeredRecycleViewAdapter(this, setList());
         mPullLoadMoreRecyclerView.setAdapter(mRecyclerViewAdapter);
         header = LayoutInflater.from(this).inflate(R.layout.item_header, mPullLoadMoreRecyclerView.getRecyclerView(), false);
+        header_one = (LinearLayout) header.findViewById(R.id.header_one);
         mRecyclerViewAdapter.setHeaderView(header);
         mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
@@ -77,6 +79,16 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
             public void onLoadMore() {
                 mCount = mCount + 1;
                 getData();
+            }
+            @Override
+            public void onGetScrollY(int scrollY) {
+                float tabsTranslationY;
+                if (scrollY < headerOneheight){
+                    tabsTranslationY =.0f;
+                }else {
+                    tabsTranslationY = scrollY - headerOneheight;
+                }
+                header.setTranslationY(tabsTranslationY);
             }
         });
         findViewById(R.id.click).setOnClickListener(new View.OnClickListener() {
@@ -144,6 +156,12 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
 
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        headerOneheight = header_one.getMeasuredHeight();
+    }
+
     /**
      * 获取屏幕上滚动距离
      *
@@ -201,6 +219,7 @@ public class PullDemoActivity extends Activity implements View.OnClickListener, 
 
             mAdapter.notifyDataSetChanged();
             Log.e("bilang", "解析成功==" + lists.toString());
+            Log.e("bilang","头部一些距离的高度" + headerOneheight);
         } catch (Exception e) {
             Log.e("bilang", "解析失败==" + e.toString());
         }

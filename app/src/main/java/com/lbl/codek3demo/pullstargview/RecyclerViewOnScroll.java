@@ -4,6 +4,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.view.View;
 
 /**
  * Created by WuXiaolong
@@ -19,10 +21,13 @@ public class RecyclerViewOnScroll extends RecyclerView.OnScrollListener {
     public RecyclerViewOnScroll(PullLoadMoreRecyclerView pullLoadMoreRecyclerView) {
         this.mPullLoadMoreRecyclerView = pullLoadMoreRecyclerView;
     }
-
+    int ScrollY = 0;
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
+        ScrollY += dy;
+        mPullLoadMoreRecyclerView.getScrollYDis(ScrollY);
+        Log.e("bilang","滚动距离--"+ ScrollY);
         int lastItem = 0;
         int firstItem = 0;
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -38,6 +43,13 @@ public class RecyclerViewOnScroll extends RecyclerView.OnScrollListener {
             firstItem = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
             lastItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
             if (lastItem == -1) lastItem = linearLayoutManager.findLastVisibleItemPosition();
+
+            // 下面是计算滚动的距离
+            int position = linearLayoutManager.findFirstVisibleItemPosition();
+            View firstVisiableChildView = linearLayoutManager.findViewByPosition(position);
+            int itemHeight = firstVisiableChildView.getHeight();
+            int scrollY= (position) * itemHeight - firstVisiableChildView.getTop();
+
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager staggeredGridLayoutManager = ((StaggeredGridLayoutManager) layoutManager);
             // since may lead to the final item has more than one StaggeredGridLayoutManager the particularity of the so here that is an array

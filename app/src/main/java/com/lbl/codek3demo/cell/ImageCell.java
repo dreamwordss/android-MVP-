@@ -6,9 +6,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.lbl.codek3demo.R;
+import com.lbl.codek3demo.blnetwork.BaseCallBack;
+import com.lbl.codek3demo.blnetwork.BaseOkHttpClient;
 import com.lbl.codek3demo.data.MvpBean;
 import com.lbl.codek3demo.holder.BaseViewHolder;
 import com.lbl.codek3demo.nfc.BlNfcOpenMessageActivity;
+
+import java.io.IOException;
+
+import okhttp3.Call;
 
 import static com.lbl.codek3demo.adapter.MvpAdapter.colorArray;
 
@@ -43,5 +49,19 @@ public class ImageCell extends BaseViewHolder<MvpBean> {
     public void onBind(int position, final MvpBean iItem) {
         layoutTitle.setBackgroundColor(colorArray[position]);
 
+    }
+
+    public void postVoid() {
+        BaseOkHttpClient.newBuilder().addParam("cat_id", 14137).post().url("").build().enqueue(new BaseCallBack() {
+            @Override
+            public void onSuccess(Object o) {
+
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+        });
     }
 }
